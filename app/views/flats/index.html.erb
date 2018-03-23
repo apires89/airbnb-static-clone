@@ -1,10 +1,38 @@
-<div class="container">
+<div class="container mt-3">
   <div class="row">
-    <div class="col-xs-12">
-      <% @flats.each do |flat| %>
-      <h1><%= flat.name %></h1>
-      <p><%= flat.address %></p>
+    <div class="col-12">
+      <h1>All our Flats</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p> You searched for . We found <%= @flats.count %> flats on our website</p>
+    </div>
+  </div>
+  <div class="row">
+    <% @flats.each do |flat| %>
+    <div class="col-xs-4">
+      <div class="flat-card">
+        <div class="flat-card-image" style="background-image: url(<%= flat.imgurl %>)"></div>
+        <div class="flat-card-content">
+          <div class="flat-card-title"><h1><%= flat.name %></h1></div>
+          <p><%= flat.address %></p>
+          <div class="flex">
+            <i class="material-icons mr-2">people</i>
+              <span><%= flat.number_of_guests %></span>
+              <span>  </span>
+            <i class="material-icons mr-2">euro_symbol</i>
+            <span><%= flat.price_per_night %></span>
+          </div>
+        </div>
+        <div class="flat-card-actions">
+          <%= link_to "More info", flat_path(flat) %>
+          <%= link_to "Edit", edit_flat_path(flat) %>
+          <%= link_to "Remove", flat, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
     </div>
     <% end %>
   </div>
 </div>
+
